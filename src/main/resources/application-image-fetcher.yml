@@ -22,8 +22,6 @@ server:
 
 scryfall:
   base-url: https://api.scryfall.com
-  cards:
-    named: /cards/named
 
 springdoc:
   swagger-ui:
