@@ -1,0 +1,44 @@
+spring:
+  application:
+    name: image-fetcher
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: postgres
+  flyway:
+    enabled: true
+    url: jdbc:postgresql://localhost:5432/postgres
+    locations: classpath:/db/migration
+    user: ${spring.r2dbc.username}
+    password: ${spring.r2dbc.password}
+
+logging:
+  level:
+    root: INFO
+    com.demo.imagefetcher: DEBUG
+
+server:
+  port: 8081
+
+scryfall:
+  base-url: https://api.scryfall.com
+  cards:
+    named: /cards/named
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+
+app:
+  user:
+    login: admin
+    password: qweqwe
+    role: ADMIN
+  config:
+    concurrency: 20
+    image-cache: 30 # in days
+  scheduler:
+    batch-size: 200
+    max-concurrency: ${app.config.concurrency}
+    expire-days: ${app.config.image-cache}
+
